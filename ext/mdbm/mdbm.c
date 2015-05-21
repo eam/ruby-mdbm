@@ -123,7 +123,7 @@ void Init_mdbm() {
   rb_define_method(cMdbm, "fetch", method_fetch, 1);
   rb_define_method(cMdbm, "[]", method_fetch, 1);
   rb_define_method(cMdbm, "store", method_store, 3);
-  rb_define_method(cMdbm, "close", method_store, 0);
+  rb_define_method(cMdbm, "close", method_close, 0);
 
   rb_define_const(cMdbm, "MDBM_API_VERSION", INT2NUM(MDBM_API_VERSION));
   rb_define_const(cMdbm, "MDBM_LOC_NORMAL", INT2NUM(MDBM_LOC_NORMAL));
