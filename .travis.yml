@@ -8,4 +8,4 @@ before_install:
   - git clone git://github.com/yahoo/mdbm.git mdbm
   - sh -c "cd mdbm; make; make install PREFIX=/usr"
 
-script: rake compile
+script: gem build ruby-mdbm.gemspec; gem install *.gem
