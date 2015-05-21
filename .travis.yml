@@ -1,0 +1,11 @@
+language: c
+compiler:
+  - gcc
+before_install:
+  - sudo apt-get update -qq
+  - sudo apt-get install rubygems
+  - sudo apt-get install -y openssl libcppunit-dev libreadline6 libreadline6-dev valgrind realpath libmodule-install-perl
+  - git clone git://github.com/yahoo/mdbm.git mdbm
+  - sh -c "cd mdbm; make; make install PREFIX=/usr"
+
+script: rake compile
