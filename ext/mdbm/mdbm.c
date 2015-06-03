@@ -11,13 +11,11 @@ static void cb_free_mdbm_db(void *p) {
 }
 
 VALUE method_open(VALUE self, VALUE file, VALUE flags, VALUE mode, VALUE psize, VALUE presize) {
-  rb_iv_set(self, "@foo", INT2NUM(77));
   MDBM * db;
   db = mdbm_open(RSTRING_PTR(file), NUM2INT(flags), NUM2INT(mode), NUM2INT(psize), NUM2INT(presize));
   if (!db) {
     rb_raise(rb_eRuntimeError, "unable to open mdbm");
   }
-  printf("db: %p\n", db);
   rb_iv_set(self, "@db", Data_Wrap_Struct(cMdbm, 0, cb_free_mdbm_db, db));
 
   return self;
@@ -25,11 +23,12 @@ VALUE method_open(VALUE self, VALUE file, VALUE flags, VALUE mode, VALUE psize, 
 
 VALUE method_first(VALUE self) {
   MDBM *db;
-  MDBM_ITER *iter;
+  MDBM_ITER iter;
   VALUE retval = Qnil;
   Data_Get_Struct(rb_iv_get(self, "@db"), MDBM, db);
+  MDBM_ITER_INIT(&iter);
   mdbm_lock(db);
-  kvpair pair = mdbm_first_r(db, iter);
+  kvpair pair = mdbm_first_r(db, &iter);
   if (!(pair.key.dsize == 0 && pair.val.dsize == 0)) {
     retval = rb_str_new(pair.key.dptr, pair.key.dsize);
   }
