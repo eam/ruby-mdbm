@@ -8,8 +8,9 @@ extension_name = 'mdbm'
 dir_config(extension_name)
 
 $CFLAGS = "-I/usr/local/include"
+$LDFLAGS = "-L/usr/local/lib"
 
-if find_library("mdbm", "mdbm_open", "/tmp/install/lib64",  "/tmp/install/lib")
+if find_library("mdbm", "mdbm_open", "/usr/local/lib")
 then
   create_makefile(extension_name)
 else

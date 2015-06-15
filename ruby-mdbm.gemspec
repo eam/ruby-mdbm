@@ -1,6 +1,6 @@
 Gem::Specification.new "ruby-mdbm" do |s|
   s.name              = "ruby-mdbm"
-  s.version           = "0.0.1"
+  s.version           = "0.0.2"
   s.platform          = Gem::Platform::RUBY
   s.authors           = ["Evan Miller"]
   s.email             = ["evan@squareup.com"]
